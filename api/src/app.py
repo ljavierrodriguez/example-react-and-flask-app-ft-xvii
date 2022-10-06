@@ -8,6 +8,7 @@ import os
 # Importando Rutas
 from routes.main import bpMain
 from routes.user import bpUser
+from routes.agenda import bpAgenda
 
 load_dotenv()
 
@@ -24,6 +25,7 @@ CORS(app)
 
 app.register_blueprint(bpMain)
 app.register_blueprint(bpUser, url_prefix='/api')
+app.register_blueprint(bpAgenda, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run()

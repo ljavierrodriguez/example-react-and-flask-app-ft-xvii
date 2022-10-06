@@ -31,6 +31,24 @@ def get_user_by_id_with_agendas(id):
     user = User.query.get(id)
     return jsonify(user.serialize_with_agendas()), 200
 
+@bpUser.route('/users/<int:id>/agendas', methods=['POST'])
+def store_agenda_by_user_id(id):
+    user = User.query.get(id)
+
+    title = request.json.get('title')
+
+    """ agenda = Agenda()
+    agenda.title = title
+    agenda.users_id = user.id
+    agenda.save() """
+
+    agenda = Agenda()
+    agenda.title = title
+    user.agendas.append(agenda)
+    user.update()
+
+    return jsonify(user.serialize_with_agendas()), 200
+
 @bpUser.route('/users/<int:id>/agendas/contacts', methods=['GET'])
 def get_user_by_id_with_agendas_with_contacts(id):
     user = User.query.get(id)
